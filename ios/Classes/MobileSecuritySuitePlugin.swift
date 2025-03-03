@@ -2,6 +2,7 @@ import Flutter
 
 public class MobileSecuritySuitePlugin: NSObject, FlutterPlugin {
     var deviceVpnDetector: DeviceVpnDetector?
+    var deviceProxyDetector: DeviceProxyDetector?
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "mobile_security_suite", binaryMessenger: registrar.messenger())
@@ -9,8 +10,26 @@ public class MobileSecuritySuitePlugin: NSObject, FlutterPlugin {
         registrar.addMethodCallDelegate(instance, channel: channel)
     }
     
+    public override init() {
+        self.deviceVpnDetector = DeviceVpnDetector()
+        self.deviceProxyDetector = DeviceProxyDetector()
+    }
+    
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         
+        let arguments: [String: Any]? = call.arguments as? [String: Any]
+        
+        switch(call.method) {
+            
+        case MethodNames.VPN:
+            self.deviceVpnDetector!.performActivity(arguments: MssArguments(arguments: arguments), result: result)
+            
+        case MethodNames.PROXY:
+            self.deviceProxyDetector!.performActivity(arguments: MssArguments(arguments: arguments), result: result)
+            
+        default:
+            result(FlutterMethodNotImplemented)
+        }
     }
 }
 
@@ -19,8 +38,8 @@ protocol MssPluginBindinginterface {
 }
 
 public class MssArguments {
-    let arguments: [String: Any]
-    init(arguments: [String : Any]) { self.arguments = arguments }
+    let arguments: [String: Any]?
+    init(arguments: [String : Any]?) { self.arguments = arguments }
 }
 
 public class MethodNames {

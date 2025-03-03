@@ -3,10 +3,10 @@ import Flutter
 
 public class DeviceVpnDetector : MssPluginBindinginterface {
     func performActivity(arguments: MssArguments, result: @escaping FlutterResult) {
-        result(detectVpnActivity())
+        result(isVpnActive())
     }
     
-    private func detectVpnActivity() -> Bool {
+    private func isVpnActive() -> Bool {
         let vpnProtocolKeyIdentifiers = ["tap", "tun", "ppp", "ipsec", "utun", "pptp"]
         
         guard let cfDict = CFNetworkCopySystemProxySettings() else { return false }
