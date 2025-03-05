@@ -3,6 +3,8 @@ import Flutter
 public class MobileSecuritySuitePlugin: NSObject, FlutterPlugin {
     var deviceVpnDetector: DeviceVpnDetector?
     var deviceProxyDetector: DeviceProxyDetector?
+    var deviceScreenMirroringDetector: DeviceScreenMirroringDetector?
+    var deviceLocationMockDetector: DeviceLocationMockDetector?
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "mobile_security_suite", binaryMessenger: registrar.messenger())
@@ -13,6 +15,8 @@ public class MobileSecuritySuitePlugin: NSObject, FlutterPlugin {
     public override init() {
         self.deviceVpnDetector = DeviceVpnDetector()
         self.deviceProxyDetector = DeviceProxyDetector()
+        self.deviceScreenMirroringDetector = DeviceScreenMirroringDetector()
+        self.deviceLocationMockDetector = DeviceLocationMockDetector()
     }
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -22,13 +26,29 @@ public class MobileSecuritySuitePlugin: NSObject, FlutterPlugin {
         switch(call.method) {
             
         case MethodNames.VPN:
-            self.deviceVpnDetector!.performActivity(arguments: MssArguments(arguments: arguments), result: result)
+            return self.deviceVpnDetector!.performActivity(arguments: MssArguments(arguments: arguments), result: result)
+            
             
         case MethodNames.PROXY:
-            self.deviceProxyDetector!.performActivity(arguments: MssArguments(arguments: arguments), result: result)
+            return self.deviceProxyDetector!.performActivity(arguments: MssArguments(arguments: arguments), result: result)
+            
+        case MethodNames.WIFI_SECURITY:
+            return result(true)
+            
+        case MethodNames.SCREEN_MIRRORING:
+            return self.deviceScreenMirroringDetector!.performActivity(arguments: MssArguments(arguments: arguments), result: result)
+            
+        case MethodNames.LOCATION_MOCK:
+            return self.deviceLocationMockDetector!.performActivity(arguments: MssArguments(arguments: arguments), result: result)
+            
+        case MethodNames.TAP_JACKING:
+            return result(true)
+            
+        case MethodNames.SCREEN_OBFUSCATE:
+            return result(true)
             
         default:
-            result(FlutterMethodNotImplemented)
+           return result(FlutterMethodNotImplemented)
         }
     }
 }
