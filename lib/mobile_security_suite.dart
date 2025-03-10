@@ -62,4 +62,6 @@ class MobileSecuritySuite implements MobileSecuritySuitePlatform {
 
   static MobileSecuritySuite get instance =>
       _instance ??= MobileSecuritySuite._internal();
+
+  void dispose() => _instance = null;    
 }

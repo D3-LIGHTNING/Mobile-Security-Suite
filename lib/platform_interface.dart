@@ -28,7 +28,7 @@ abstract interface class MobileSecurityInterface {
   Future<bool> isRunningOnPhysicalDevice();
 
   Future<bool> isDeviceDebugging();
-
+    
   Future<bool> isDeveloperOptionsEnabled();
 
   Future<bool> isOnExternalStorage();
