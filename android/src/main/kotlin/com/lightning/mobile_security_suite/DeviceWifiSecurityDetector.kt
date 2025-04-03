@@ -21,15 +21,25 @@ class DeviceWifiSecurityDetector : MssPluginBindingInterface {
 
     override fun performActivity(arguments: MssArguments, result: MethodChannel.Result) {
         try {
-            val wifiConnected = isWifiConnected()
-            if (wifiConnected && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                validateWifiSecurity(result)
-            } else {
-                result.success(true)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                val wifiConnected = isWifiConnected()
+                if (wifiConnected) {
+                    return validateWifiSecurity(result)
+                }
             }
+            result.success(true)
+
         } catch (exception: Exception) {
-            Log.e(LOGTAG, "Exception occurred while performing 'detectWifiSecurityActivity'", exception)
-            result.error("1", "Exception occurred while performing 'detectWifiSecurityActivity'", exception)
+            Log.e(
+                LOGTAG,
+                "Exception occurred while performing 'detectWifiSecurityActivity'",
+                exception
+            )
+            result.error(
+                "1",
+                "Exception occurred while performing 'detectWifiSecurityActivity'",
+                exception
+            )
         }
     }
 
