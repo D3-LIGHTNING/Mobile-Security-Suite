@@ -200,7 +200,6 @@ class _MobileSecuritySuiteHomeState extends State<MobileSecuritySuiteHome> {
               description: "Check if device Screen Mirroring is active.",
               buttonTitle: "Check state",
               onButtonPressed: () async {
-                await Permission.location.request();
                 if (await MobileSecuritySuite.instance
                     .isScreenMirroringActive()) {
                   showStatusSnackBar("Device is Screen Mirroing");
