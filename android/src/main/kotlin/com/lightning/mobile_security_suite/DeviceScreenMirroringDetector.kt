@@ -3,6 +3,7 @@ package com.lightning.mobile_security_suite
 import android.content.Context
 import android.hardware.display.DisplayManager
 import android.util.Log
+import android.view.Display
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodChannel
 
@@ -38,13 +39,10 @@ class DeviceScreenMirroringDetector : MssPluginBindingInterface {
             val displays = displayManager.displays
             if (displays.size > 1) {
                 for (display in displays) {
-                    if (display.flags and DisplayManager.VIRTUAL_DISPLAY_FLAG_PRESENTATION != 0) {
+                    if (display.displayId != Display.DEFAULT_DISPLAY && display.flags and Display.FLAG_PRESENTATION != 0) {
                         return true
                     }
 
-                    if (display.flags and DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR != 0) {
-                        return true
-                    }
                 }
             }
             return false
