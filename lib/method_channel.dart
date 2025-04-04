@@ -18,11 +18,12 @@ class MethodChannelMobileSecuritySuite extends MobileSecuritySuitePlatform {
 
   @override
   Future<bool> isDeveloperOptionsEnabled() async =>
-      await JailbreakRootDetection.instance.isDevMode;
+      Platform.isIOS ? false : await JailbreakRootDetection.instance.isDevMode;
 
   @override
-  Future<bool> isOnExternalStorage() async =>
-      await JailbreakRootDetection.instance.isOnExternalStorage;
+  Future<bool> isOnExternalStorage() async => Platform.isIOS
+      ? false
+      : await JailbreakRootDetection.instance.isOnExternalStorage;
 
   @override
   Future<bool> isVpnNetworkActive() async =>
