@@ -11,9 +11,7 @@ public class DeviceLocationMockDetector : MssPluginBindinginterface {
     
     private func isLocationMocked() -> Bool {
         let locationManager = CLLocationManager()
-        
-        locationManager.requestAlwaysAuthorization()
-        
+                
         if #available(iOS 15.0, *) {
             let isLocationSimulated =
             locationManager.location?.sourceInformation?.isSimulatedBySoftware ?? false
