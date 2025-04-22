@@ -1,6 +1,6 @@
 part of 'platform_interface.dart';
 
-class MethodChannelMobileSecuritySuite extends MobileSecuritySuitePlatform {
+class _MethodChannelMobileSecuritySuite extends MobileSecuritySuitePlatform {
   @visibleForTesting
   final methodChannel = const MethodChannel('mobile_security_suite');
 

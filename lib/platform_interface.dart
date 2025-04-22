@@ -13,7 +13,7 @@ abstract class MobileSecuritySuitePlatform extends PlatformInterface
   static final Object _token = Object();
 
   static MobileSecuritySuitePlatform _instance =
-      MethodChannelMobileSecuritySuite();
+      _MethodChannelMobileSecuritySuite();
 
   static MobileSecuritySuitePlatform get instance => _instance;
 
@@ -29,7 +29,7 @@ abstract interface class MobileSecurityInterface {
   Future<bool> isRunningOnPhysicalDevice();
 
   Future<bool> isDeviceDebugging();
-    
+
   Future<bool> isDeveloperOptionsEnabled();
 
   Future<bool> isOnExternalStorage();
