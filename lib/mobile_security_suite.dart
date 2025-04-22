@@ -1,7 +1,12 @@
 import 'platform_interface.dart';
 
+/// Dart API Interface of MobileSecuritySuite Plugin.
 class MobileSecuritySuite implements MobileSecuritySuitePlatform {
+  // Private constructor of MobileSecuritySuite.
   const MobileSecuritySuite._internal();
+  // Private and static instance of MobileSecuritySuite.
+  // This instance by nature nullable and is null until the first call to `MobileSecuritySuite.instance`.
+  // This pattern is implemented to aquire lazy loaded instance of MobileSecuritySuite.
   static MobileSecuritySuite? _instance;
 
   /// Checks whether the current running device is compromised via rooting (Android)
@@ -144,32 +149,143 @@ class MobileSecuritySuite implements MobileSecuritySuitePlatform {
   Future<bool> isWifiConnectionSecure() =>
       MobileSecuritySuitePlatform.instance.isWifiConnectionSecure();
 
+  /// Checks whether the screen of the device is currently being mirrored to another display
+  /// via technologies like Miracast for Android or AirPlay for iOS.
+  ///
+  /// **Return value:**
+  /// - `true`  → Screen mirroring is currently active
+  /// - `false` → No screen mirroring detected
+  ///
+  /// **Supported Platforms:** Android and iOS
+  ///
+  /// Overridden from `MobileSecuritySuitePlatform`.
   @override
   Future<bool> isScreenMirroringActive() =>
       MobileSecuritySuitePlatform.instance.isScreenMirroringActive();
 
+  /// Checks whether the device is reporting a mocked (fake/spoofed) location.
+  ///
+  /// This is useful for detecting apps or tools that attempt to trick the device into
+  /// reporting false location data, which could be a sign of location spoofing tools
+  /// like Fake GPS apps.
+  ///
+  /// **Return value:**
+  /// - `true`  → Mock location is active (location is being faked/spoofed)
+  /// - `false` → Device location appears to be genuine
+  ///
+  /// **Supported Platforms:** Android and iOS
+  ///
+  /// Overridden from `MobileSecuritySuitePlatform`.
   @override
   Future<bool> isLocationMocked() =>
       MobileSecuritySuitePlatform.instance.isLocationMocked();
 
+  /// Enables **tapjacking prevention** for the application.
+  ///
+  /// Tapjacking is a malicious technique where invisible elements are layered over your app
+  /// to trick users into tapping something they didn’t intend to.
+  ///
+  /// This feature should be enabled in screens where sensitive user interaction occurs
+  /// (e.g., login, payment, PIN input).
+  ///
+  /// **Return value:**
+  /// - `true`  → Tapjacking prevention enabled successfully
+  /// - `false` → Failed to apply tapjacking protection
+  ///
+  /// **iOS Note:** On iOS, this method always returns `true`.
+  ///
+  /// **Supported Platforms:** Android only
+  ///
+  /// Overridden from `MobileSecuritySuitePlatform`.
   @override
   Future<bool> enableTapJacking() =>
       MobileSecuritySuitePlatform.instance.enableTapJacking();
 
+  /// Disables **tapjacking prevention** for the application.
+  ///
+  /// **Return value:**
+  /// - `true`  → Tapjacking prevention disabled successfully
+  /// - `false` → Failed to disable tapjacking protection
+  ///
+  /// **iOS Note:** On iOS, this method always returns `true`.
+  ///
+  /// **Supported Platforms:** Android only
+  ///
+  /// See [enableTapJacking] for more info.
+  ///
+  /// Overridden from `MobileSecuritySuitePlatform`.
   @override
   Future<bool> disableTapJacking() =>
       MobileSecuritySuitePlatform.instance.disableTapJacking();
 
+  /// Enables **screen obfuscation** to prevent sensitive information from being captured
+  /// via screenshots or screen recordings.
+  ///
+  /// When this feature is enabled, the system will treat the app's window as secure,
+  /// which blocks:
+  /// - Screenshots
+  /// - Screen recordings
+  /// - Android "Recents" thumbnails showing app content
+  ///
+  /// **Use Case:** Enable this on screens that show sensitive user data, like
+  /// authentication flows, personal info, or financial transactions.
+  ///
+  /// **Return value:**
+  /// - `true`  → Screen obfuscation enabled successfully
+  /// - `false` → Failed to apply obfuscation
+  ///
+  /// **iOS Note:** On iOS, this method always returns `true`.
+  ///
+  /// **Supported Platforms:** Android only
+  ///
+  /// Overridden from `MobileSecuritySuitePlatform`.
   @override
   Future<bool> enableScreenObfuscation() =>
       MobileSecuritySuitePlatform.instance.enableScreenObfuscation();
 
+  /// Disables **screen obfuscation**, allowing the app's UI to be visible from:
+  /// - Screenshots
+  /// - Screen recordings
+  /// - Android "Recents" thumbnails showing app content
+  ///
+  /// **Return value:**
+  /// - `true`  → Screen obfuscation disabled successfully
+  /// - `false` → Failed to disable obfuscation
+  ///
+  /// **iOS Note:** On iOS, this method always returns `true`.
+  ///
+  /// **Supported Platforms:** Android only
+  ///
+  /// See [enableScreenObfuscation] for more info.
+  ///
+  /// Overridden from `MobileSecuritySuitePlatform`.
   @override
   Future<bool> disableScreenObfuscation() =>
       MobileSecuritySuitePlatform.instance.disableScreenObfuscation();
 
+  /// Provides a singleton instance of [MobileSecuritySuite].
+  ///
+  /// This ensures that all calls throughout the application refer to the same
+  /// underlying instance of the security suite, maintaining consistency.
+  ///
+  /// Internally uses Dart’s lazy initialization pattern (`??=`).
+  ///
+  /// **Usage Example:**
+  /// ```dart
+  /// final security = MobileSecuritySuite.instance;
+  /// ```
+  ///
+  /// Use this to access security-related checks and actions across your app.
   static MobileSecuritySuite get instance =>
       _instance ??= MobileSecuritySuite._internal();
 
+  /// Clears the internal [MobileSecuritySuite] singleton instance.
+  ///
+  /// After calling this method, a new instance will be lazily created
+  /// the next time [MobileSecuritySuite.instance] is accessed.
+  ///
+  /// Useful in scenarios like user logout or app state resets.
+  ///
+  /// Lightweight and safe to call when needed.
   void dispose() => _instance = null;
 }
