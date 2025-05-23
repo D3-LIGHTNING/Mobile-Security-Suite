@@ -1,8 +1,8 @@
-MobileSecuritySuite 🔐
+# mobile_security_suite
 
 A Flutter plugin to fortify your mobile apps against common threats like rooted devices, emulators, debuggers, proxy/VPN usage, and more.
 
-Protect your users. Secure your data. Sleep better 😌
+Protect your users. Secure your app. Sleep better 😌
 
 🌟 Features
 
@@ -32,10 +32,12 @@ Protect your users. Secure your data. Sleep better 😌
 
 Until this package is published on pub.dev, you can use it by referencing the GitHub repository directly:
 
+``` yaml
 dependencies:
   mobile_security_suite:
     git:
       url: https://github.com/your-org/mobile_security_suite.git
+```       
 
 Then run:
 
@@ -43,6 +45,7 @@ flutter pub get
 
 🚀 Getting Started
 
+``` dart
 import 'package:mobile_security_suite/mobile_security_suite.dart';
 
 void checkSecurity() async {
@@ -52,134 +55,29 @@ void checkSecurity() async {
     print("Device is compromised (rooted/jailbroken)");
   }
 }
-
-To disable the singleton (e.g., on logout):
-
-MobileSecuritySuite.instance.dispose();
+```
 
 📘 API Overview
 
 Each method returns a Future<bool> and is platform-aware:
 
-Method
+| Method                        | Description                                                                     | Platforms    | Returns                                |
+| ----------------------------- | ------------------------------------------------------------------------------- | ------------ | -------------------------------------- |
+| `isDeviceCompromised()`       | Checks if device is rooted (Android) or jailbroken (iOS).                       | Android, iOS | `Future<bool>` (`true` if compromised) |
+| `isRunningOnPhysicalDevice()` | Checks if the device is a physical device or emulator.                          | Android, iOS | `Future<bool>` (`true` if physical)    |
+| `isDeviceDebugging()`         | Detects if debugging (e.g., ADB) is enabled.                                    | Android, iOS | `Future<bool>`                         |
+| `isDeveloperOptionsEnabled()` | Checks if developer options are enabled (always `false` on iOS).                | Android only | `Future<bool>`                         |
+| `isOnExternalStorage()`       | Checks if app is installed on external storage (always `false` on iOS).         | Android only | `Future<bool>`                         |
+| `isVpnNetworkActive()`        | Checks if device is connected to a VPN.                                         | Android, iOS | `Future<bool>`                         |
+| `isNetworkProxyEnabled()`     | Checks if device is connected through a proxy.                                  | Android, iOS | `Future<bool>`                         |
+| `isWifiConnectionSecure()`    | Checks if Wi-Fi connection is secure (always `true` on iOS).                    | Android only | `Future<bool>`                         |
+| `isScreenMirroringActive()`   | Checks if screen mirroring is active.                                           | Android, iOS | `Future<bool>`                         |
+| `isLocationMocked()`          | Detects if device location is mocked/spoofed.                                   | Android, iOS | `Future<bool>`                         |
+| `enableTapJacking()`          | Enables tapjacking protection (always `true` on iOS).                           | Android only | `Future<bool>`                         |
+| `disableTapJacking()`         | Disables tapjacking protection (always `true` on iOS).                          | Android only | `Future<bool>`                         |
+| `enableScreenObfuscation()`   | Enables screen obfuscation to block screenshots/recordings (iOS always `true`). | Android only | `Future<bool>`                         |
+| \`disableScreenObfuscation    |                                                                                 |              |                                        |
 
-Description
-
-Android
-
-iOS
-
-isDeviceCompromised()
-
-Checks for root/jailbreak
-
-✅
-
-✅
-
-isRunningOnPhysicalDevice()
-
-Physical device vs emulator
-
-✅
-
-✅
-
-isDeviceDebugging()
-
-Debug/ADB enabled check
-
-✅
-
-✅
-
-isDeveloperOptionsEnabled()
-
-Checks if Dev Options are enabled
-
-✅
-
-❌ Always false
-
-isOnExternalStorage()
-
-App installed on external storage
-
-✅
-
-❌ Always false
-
-isVpnNetworkActive()
-
-VPN connection check
-
-✅
-
-✅
-
-isNetworkProxyEnabled()
-
-Proxy detection
-
-✅
-
-✅
-
-isWifiConnectionSecure()
-
-Secure Wi-Fi check
-
-✅
-
-❌ Always true
-
-isScreenMirroringActive()
-
-Screen mirroring detection
-
-✅
-
-✅
-
-isLocationMocked()
-
-Fake GPS / mock location detection
-
-✅
-
-✅
-
-enableTapJacking()
-
-Protect against tapjacking
-
-✅
-
-✅ Always true
-
-disableTapJacking()
-
-Disable tapjacking protection
-
-✅
-
-✅ Always true
-
-enableScreenObfuscation()
-
-Prevent screenshots/recording
-
-✅
-
-✅ Always true
-
-disableScreenObfuscation()
-
-Allow screenshots/recording
-
-✅
-
-✅ Always true
 
 💡 Use Case Examples
 
