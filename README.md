@@ -28,7 +28,7 @@ Protect your users. Secure your app. Sleep better 😌
 
 🚫 Screen Obfuscation (Block screenshots/recording)
 
-# 📦 Installation
+## 📦 Installation
 
 Until this package is published on pub.dev, you can use it by referencing the GitHub repository directly:
 
