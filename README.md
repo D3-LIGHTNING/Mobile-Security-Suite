@@ -36,7 +36,8 @@ Until this package is published on pub.dev, you can use it by referencing the Gi
 dependencies:
   mobile_security_suite:
     git:
-      url: https://github.com/your-org/mobile_security_suite.git
+      url: https://github.com/D3-LIGHTNING/Mobile-Security-Suite.git
+      ref: main    
 ```       
 
 Then run:
