@@ -4,7 +4,7 @@ A Flutter plugin to fortify your mobile apps against common threats like rooted 
 
 Protect your users. Secure your app. Sleep better 😌
 
-🌟 Features
+# 🌟 Features
 
 ✅ Root/Jailbreak Detection
 
@@ -94,9 +94,5 @@ Avoid tapjacking on transaction/PIN entry UIs 🔒
 
 Contributions, issues, and feature requests are welcome! Feel free to open an issue or submit a PR 💌
 
-📄 License
-
-MIT License
-
-Made with ❤️ and security paranoia by Pradhu 🛡️✨
+# Made with ❤️ and security paranoia by D3-LIGHTNING 🛡️✨
 
