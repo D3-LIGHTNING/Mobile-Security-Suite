@@ -28,7 +28,7 @@ Protect your users. Secure your app. Sleep better 😌
 
 🚫 Screen Obfuscation (Block screenshots/recording)
 
-## 📦 Installation
+## 🚀 Getting Started
 
 Until this package is published on pub.dev, you can use it by referencing the GitHub repository directly:
 
@@ -38,13 +38,29 @@ dependencies:
     git:
       url: https://github.com/D3-LIGHTNING/Mobile-Security-Suite.git
       ref: main    
-```       
+```
 
-Then run:
+### Android
 
-flutter pub get
+No configurations required.
 
-🚀 Getting Started
+### iOS
+
+- Update `Info.plist`
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>undecimus</string>
+    <string>sileo</string>
+    <string>zbra</string>
+    <string>filza</string>
+    <string>activator</string>
+    <string>cydia</string>
+</array>
+```
+
+## Usage
 
 ``` dart
 import 'package:mobile_security_suite/mobile_security_suite.dart';
