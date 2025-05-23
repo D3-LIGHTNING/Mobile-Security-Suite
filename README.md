@@ -42,7 +42,16 @@ dependencies:
 
 ### Android
 
-No configurations required.
+The plugin uses the below Permissions. 
+
+```xml
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.HIDE_OVERLAY_WINDOWS" />
+```    
+
+However you don't have to add these permissions in to your "AndroidManifest.xml" file since these permissions are alrady added in the plugin itself.
 
 ### iOS
 
@@ -71,6 +80,18 @@ void checkSecurity() async {
   if (await suite.isDeviceCompromised()) {
     print("Device is compromised (rooted/jailbroken)");
   }
+}
+```
+
+The "isLocationMocked" API requires Location permissions to operate. You can use "permission_handler" plugin to request Permissions like this.
+
+``` dart
+await Permission.location.request();
+
+if (await MobileSecuritySuite.instance.isLocationMocked()) {
+    showStatusSnackBar("Location is being mocked");
+} else {
+    showStatusSnackBar("Location is not mocked");
 }
 ```
 
