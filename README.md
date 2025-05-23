@@ -51,7 +51,7 @@ The plugin uses the below Permissions.
 <uses-permission android:name="android.permission.HIDE_OVERLAY_WINDOWS" />
 ```    
 
-However you don't have to add these permissions in to your "AndroidManifest.xml" file since these permissions are alrady added in the plugin itself.
+However you don't have to add these permissions in to your "AndroidManifest.xml" file since these permissions are already added in the plugin itself.
 
 ### iOS
 
@@ -114,7 +114,7 @@ Each method returns a Future<bool> and is platform-aware:
 | `enableTapJacking()`          | Enables tapjacking protection (always `true` on iOS).                           | Android only | `Future<bool>`                         |
 | `disableTapJacking()`         | Disables tapjacking protection (always `true` on iOS).                          | Android only | `Future<bool>`                         |
 | `enableScreenObfuscation()`   | Enables screen obfuscation to block screenshots/recordings (iOS always `true`). | Android only | `Future<bool>`                         |
-| \`disableScreenObfuscation    |                                                                                 |              |                                        |
+| \`disableScreenObfuscation    |  Enables screen obfuscation to block screenshots/recordings (iOS always `true`).                                                                              |              |                                        |
 
 
 💡 Use Case Examples
