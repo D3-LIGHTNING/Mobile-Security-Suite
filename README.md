@@ -114,7 +114,7 @@ Each method returns a Future<bool> and is platform-aware:
 | `enableTapJacking()`          | Enables tapjacking protection (always `true` on iOS).                           | Android only | `Future<bool>`                         |
 | `disableTapJacking()`         | Disables tapjacking protection (always `true` on iOS).                          | Android only | `Future<bool>`                         |
 | `enableScreenObfuscation()`   | Enables screen obfuscation to block screenshots/recordings (iOS always `true`). | Android only | `Future<bool>`                         |
-| `disableScreenObfuscation()`    |  Enables screen obfuscation to block screenshots/recordings (iOS always `true`).                                                                              |              |                                        |
+| `disableScreenObfuscation()`    |  Disables screen obfuscation (iOS always `true`).      | Android only          | `Future<bool>`                             |
 
 
 💡 Use Case Examples
